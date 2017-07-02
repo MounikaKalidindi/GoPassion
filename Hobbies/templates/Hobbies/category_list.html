@@ -1,0 +1,17 @@
+{% extends 'Hobbies/base.html' %}
+
+{% block content %}
+	<h1> Categories List<h1>
+	{% if category_name %}
+		<div id="horizontalmenu" float = "right">
+			<ul class="menu">
+        			{% for c in category_name %}
+		        		<li> <a href= {% url 'user_home' %}>{{c.category}}</a> </li>
+				{% endfor %}		
+			</ul>
+		</div>
+	{% else %}
+		<p> Haiiii there are no categories </p>
+	{% endif %}
+
+{% endblock %}

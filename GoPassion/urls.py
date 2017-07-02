@@ -19,5 +19,8 @@ from Hobbies import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='home'),
-    url(r'^index$', views.index, name='home'),
+    url(r'^index$', views.index, name='index' ),
+    url(r'^user_home$', views.index, name='user_home'),
+    url(r'^categories$', views.categories, name='categories'),
+    #url(r'^categories/(\w+)$', views.sub_category, name='sub_category'),
 ]
