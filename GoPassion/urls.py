@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^index$', views.index, name='index' ),
     url(r'^user_home$', views.index, name='user_home'),
     url(r'^categories$', views.categories, name='categories'),
-    #url(r'^categories/(\w+)$', views.sub_category, name='sub_category'),
+    url(r'^categories/(\w+)$', views.getSub_Categories, name='sub_category'),
 ]

@@ -1,0 +1,17 @@
+
+{% block content %}
+	<h1>{{ cat_name }}Sub Categories </h1>
+        {% if sub_cat %}
+                <div id="horizontalmenu" float = "right">
+                        <ul class="menu">
+                                {% for s in sub_cat %}
+                                        <li> <a href = 'userhome'> {{s.sub_category_id}}  </a> </li>
+                                {% endfor %}            
+                        </ul>
+                </div>
+        {% else %}
+                <p> Haiiii there are no categories </p>
+        {% endif %}
+
+
+{% endblock %}

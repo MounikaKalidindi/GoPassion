@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpResponse
 #from library.models import Myclass
-from Hobbies.models import Categories
+from Hobbies.models import Categories, Categories_Sub_Categories_Mapping, Sub_Categories
 from django.views import generic
 from django.template import loader
 
@@ -12,17 +12,37 @@ def index(request) :
 	return HttpResponse( "Mouniii")
 
 
-def categories(request):	
+def categories_list(request):	
 	#cat = Categories.objects.all().order_by('id')[:3]
-	c_name = get_list_or_404(Categories)
-	#return HttpResponse(cat_name + "haii")
+	category_obj = get_list_or_404(Categories)
+	category_map_obj = get_list_or_404(Categories_Sub_Categories_Mapping)
+	sub_category_obj = get
+	sub_category_map_obj = get_list_or_404(Sub_Categories_Sub_Categories1_Mapping)
+	#c_id = getCategoryId(cat_name)
+	#sub_c_obj = get_list_or_404(Categories_Sub_Categories_Mapping, category_id = c_id)
 	return render(
 		request,
 		'Hobbies/category_list.html',
-		context = {'category_name':c_name}
+		context = {'categories':category_obj, 'categories_map':category_map_obj, '':, 'sub_categories_map':sub_category_map_obj}
 	)
 
-"""class CategoriesListView(generic.ListView):
+def getCategoryId(cat_name):
+	#c_obj = get_list_or_404(Categories)
+	c_id = get_object_or_404 (Categories, category = cat_name)
+	return (c_id.id)
+def getSub_Categories(request, cat_name):
+	c_id = getCategoryId(cat_name)
+	sub_c_obj = get_list_or_404(Categories_Sub_Categories_Mapping, category_id = c_id)
+	
+	return render(
+		request,
+		'Hobbies/sub_category_list.html',
+		context = {'cat_name': cat_name, 'sub_cat':sub_c_obj}
+	)
+
+	
+"""
+class CategoriesListView(generic.ListView):
 	model = Categories
 
 	def get_context_data(self):

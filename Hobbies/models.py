@@ -45,7 +45,7 @@ class Sub_Categories_Sub_Categories1_Mapping(models.Model):
 	def __str__(self):
 		return "{0}-{1}".format(self.sub_category, self.sub_category1)
 
-class Details(models.Model):
+class Tutorials(models.Model):
 	sub_category1_map_id = models.ForeignKey(Sub_Categories_Sub_Categories1_Mapping, on_delete = models.CASCADE)
 	description = models.CharField(max_length=500)
 	video = models.CharField(max_length=300)
@@ -61,14 +61,22 @@ class FeedBack(models.Model):
 		return "{0}-{1}-{2}".format(self.feedback, self.suggesions, self.category_id)
 
 class Posts(models.Model):
-	category_id = models.CharField(max_length=50)
+	category_id = models.ForeignKey(Categories_Sub_Categories_Mapping)
 	post_adv = models.BooleanField()
-	img = models.CharField(max_length=300)
-	video = models.CharField(max_length=300)
+	src = models.CharField(max_length=300)
+	likes = models.IntegerField()
 	description = models.CharField(max_length=300)
+	
 	def __str__(self):
-		return "{0}-{1}-{2}-{3}-{4}".format(self.category_id, self.post_adv, self.img, self.video, self.description)
+		return "{0}-{1}-{2}-{3}-{4}".format(self.category_id, self.post_adv, self.src, self.likes, self.description)
 
+class Advertisements(models.Model):
+	user_id = models.ForeignKey(User)
+	category_id = models.ForeignKey(Categories_Sub_Categories_Mapping)
+	post_id = models.ForeignKey(Posts)
+	def __str__(self):
+		return "{0}-{1}-{2}".format(self.user_id, self.category_id, self.post_id)
+"""
 class Utilities(models.Model):
 	utility = models.CharField(max_length=50)
 	links = models.CharField(max_length=50)
@@ -80,16 +88,16 @@ class Details_Utilities_Mapping(models.Model):
 	utility_id = models.ForeignKey(Utilities, on_delete = models.CASCADE)
 	def __str__(self):
 		return "{0}-{1}".format(self.details_id, self.utility_id)
-
+"""
 class Followers(models.Model):
-	user = models.ForeignKey(User, related_name="user_id", on_delete = models.CASCADE)
-	follow = models.ForeignKey(User, related_name="follower_id", on_delete = models.CASCADE)
+	user_id = models.ForeignKey(User, related_name="user_id", on_delete = models.CASCADE)
+	follower_id = models.ForeignKey(User, related_name="follower_id", on_delete = models.CASCADE)
 	def __str__(self):
 		return "{0}-{1}".format(self.user_id, self.follower_id)
-
 class ScoreBoard(models.Model):
 	category_id = models.ForeignKey(Categories, on_delete = models.CASCADE)
 	rank = models.IntegerField()
 	user_name = models.ForeignKey(Profile, on_delete = models.CASCADE)
 	def __str__(self):
 		return "{0}-{1}-{2}".format(self.category_id, self.rank, self.user_name)
+
