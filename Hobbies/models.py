@@ -18,14 +18,14 @@ def save_user_profile(sender, instance, **kwargs):
 	instance.profile.save()
 
 class Categories(models.Model):
-	category = models.CharField(max_length=50)
+	category_name = models.CharField(max_length=50)
 	def __str__(self):
-		return self.category
+		return self.category_name
 
 class Sub_Categories(models.Model):
-	sub_category = models.CharField(max_length=50)
+	sub_category_name = models.CharField(max_length=50)
 	def __str__(self):
-                return self.sub_category
+                return self.sub_category_name
 
 class Categories_Sub_Categories_Mapping(models.Model):
 	category_id = models.ForeignKey(Categories, on_delete = models.CASCADE)
@@ -35,15 +35,15 @@ class Categories_Sub_Categories_Mapping(models.Model):
 
 class Sub_Categories1(models.Model):
 	#sub_category = models.ForeignKey(Categories_Sub_Categories_Mapping, on_delete = models.CASCADE)
-	sub_category1 = models.CharField(max_length=50)
+	sub_category1_name = models.CharField(max_length=50)
 	def __str__(self):
-		return  self.sub_category1
+		return  self.sub_category1_name
 
 class Sub_Categories_Sub_Categories1_Mapping(models.Model):
-	sub_category = models.ForeignKey(Sub_Categories, on_delete = models.CASCADE)
-	sub_category1 = models.ForeignKey(Sub_Categories1, on_delete = models.CASCADE)
+	sub_category_id = models.ForeignKey(Sub_Categories, on_delete = models.CASCADE)
+	sub_category1_id = models.ForeignKey(Sub_Categories1, on_delete = models.CASCADE)
 	def __str__(self):
-		return "{0}-{1}".format(self.sub_category, self.sub_category1)
+		return "{0}-{1}".format(self.sub_category_id, self.sub_category1_id)
 
 class Tutorials(models.Model):
 	sub_category1_map_id = models.ForeignKey(Sub_Categories_Sub_Categories1_Mapping, on_delete = models.CASCADE)
@@ -56,23 +56,24 @@ class Tutorials(models.Model):
 class FeedBack(models.Model):
 	feedback = models.CharField(max_length=50)
 	suggesions = models.CharField(max_length=50)
-	category_id = models.ForeignKey(Categories, on_delete = models.CASCADE)
+	category_map_id = models.ForeignKey(Categories_Sub_Categories_Mapping, on_delete = models.CASCADE)
 	def __str__(self):
 		return "{0}-{1}-{2}".format(self.feedback, self.suggesions, self.category_id)
 
 class Posts(models.Model):
-	category_id = models.ForeignKey(Categories_Sub_Categories_Mapping)
+	user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+	category_map_id = models.ForeignKey(Categories_Sub_Categories_Mapping, on_delete = models.CASCADE)
 	post_adv = models.BooleanField()
 	src = models.CharField(max_length=300)
 	likes = models.IntegerField()
 	description = models.CharField(max_length=300)
 	
 	def __str__(self):
-		return "{0}-{1}-{2}-{3}-{4}".format(self.category_id, self.post_adv, self.src, self.likes, self.description)
+		return "{0}-{1}-{2}-{3}-{4}-{5}".format(self.user_id, self.category_map_id.id, self.post_adv, self.src, self.likes, self.description)
 
 class Advertisements(models.Model):
 	user_id = models.ForeignKey(User)
-	category_id = models.ForeignKey(Categories_Sub_Categories_Mapping)
+	category_map_id = models.ForeignKey(Categories_Sub_Categories_Mapping, on_delete = models.CASCADE)
 	post_id = models.ForeignKey(Posts)
 	def __str__(self):
 		return "{0}-{1}-{2}".format(self.user_id, self.category_id, self.post_id)

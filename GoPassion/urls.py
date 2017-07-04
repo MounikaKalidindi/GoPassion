@@ -18,9 +18,10 @@ from django.contrib import admin
 from Hobbies import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='home'),
+    url(r'^q$', views.getDifferentOptions1, name='home'),
     url(r'^index$', views.index, name='index' ),
-    url(r'^user_home$', views.index, name='user_home'),
-    url(r'^categories$', views.categories, name='categories'),
-    url(r'^categories/(\w+)$', views.getSub_Categories, name='sub_category'),
+    url(r'^user_home$', views.nav_cat_list, name='user_home'),
+    url(r'^user_home/(\w+)/(\w+)$', views.getDifferentOptions, name="user_options" ),
+    url(r'^categories$', views.categories_list, name='categories'),
+    #url(r'^categories/(\w+)$', views.getSub_Categories, name='sub_category'),
 ]

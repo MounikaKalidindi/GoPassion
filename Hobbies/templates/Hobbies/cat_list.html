@@ -1,0 +1,32 @@
+
+{% block content %}
+    <h1> Categories List<h1>
+    {% if categories %}
+        <div id="horizontalmenu" float = "right">
+            <ul class="menu">
+            {% for cat in categories %}
+                <li> {{cat.category_name}}  </li>            
+                {% if categories_map %}
+                    {% for cat_map in categories_map %}                 
+                        {% if cat.id == cat_map.category_id.id %}
+                            {% for sub_cat in sub_categories %} 
+			        {% if cat_map.sub_category_id.id == sub_cat.id %}	
+                                <div id="horizontalmenu" float = "right">
+                                <ul class="menu">
+					<li> <a href = {% url 'user_options' cat.category_name sub_cat.sub_category_name %}> {{cat_map.sub_category_id}} </a> </li>
+                                 </ul>
+                                 </div> 
+				{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p> Haiiii there are no categories </p>
+    {% endif %}
+{% endblock %}
+
+
