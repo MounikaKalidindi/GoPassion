@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^user_home/([0-9]+)/([0-9]+)/$', views.getDifferentOptions, name="user_options"),
     url(r'^categories$', views.categories_list, name='categories'),
     # url(r'^categories/(\w+)$', views.getSub_Categories, name='sub_category'),
-    url(r'^user_home/([0-9]+)/([0-9]+)/addPost/$', views.addpost, name='addpost')
+    url(r'^user_home/([1-9]+)/([1-9]+)/addPost$', views.addpost, name='addpost')
 
 ]
