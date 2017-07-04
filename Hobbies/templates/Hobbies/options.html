@@ -3,13 +3,12 @@
 {% block content %}
     <h1> Categories List<h1>
 
-<form>
-		<button value = "add"> ADDD</button>
-		
+<form action = "^/addPost" method="POST">
+		<input type = "submit"> ADDD </input>
 </form>
 
     {% if categories %}
-        <div id="horizontalmenu" float = "right">
+        <div id="horizontal menu" float = "right">
             <ul class="menu">
             {% for cat in categories %}
                 <li> {{cat.category_name}}  </li>            
@@ -21,7 +20,7 @@
 				{% if p.post_adv == True %}	
                                 <div id="horizontalmenu" float = "right">
                                 <ul class="menu">
-					<li> <a href = {% url 'index' %}> {{p.user_id}} </a> </li>
+					<li> <a href = "{% url 'index' %}"> {{p.user_id}} </a> </li>
                                  </ul>
                                  </div> 
 				{% endif %}

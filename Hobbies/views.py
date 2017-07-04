@@ -5,6 +5,8 @@ from models import *
 from django.views import generic
 from django.template import loader
 from forms import *
+from django import forms;
+
 
 # Create your views here.
 def index(request):
@@ -65,11 +67,24 @@ def getDifferentOptions1(request):
         context={'categories': category_obj, 'categories_map': category_map_obj, 'posts': posts_obj}
     )
 
-def addpost(request):
-	if request.method == 'POST':
-		form = PostForm(request.POST)
-		if form.is_valid():
-			return HttpResponse("<h1>thanks for the post</h1>")
-	else:
-		form = PostForm()
-	return render(request, 'Hobbies/form.html', {'form':form, 'form_name': 'ADD POST FORM'})
+
+def addpost(request, cat_id, sub_cat_id):
+    name = 'ADD POST FORM'
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            src = form['src'].value()
+            post_adv = form['post_adv'].value()
+            descr = form['description'].value()
+            post = Posts()
+            post.src = src
+            post.user_id = request.user
+            post.description = descr
+            post.likes = 0
+            post.post_adv = post_adv
+            post.category_map_id = get_object_or_404(Categories_Sub_Categories_Mapping, category_id= cat_id, sub_category_id = sub_cat_id)
+            post.save()
+            return HttpResponse("<h1>thanks for the post" + descr + src + str(post_adv)+ str(post.user_id.id) + "</h1>")
+    else:
+        form = PostForm()
+    return render(request, 'Hobbies/form.html', {'form': form, 'form_name': name})

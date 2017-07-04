@@ -84,7 +84,7 @@ class Posts(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     category_map_id = models.ForeignKey(Categories_Sub_Categories_Mapping, on_delete=models.CASCADE)
     post_adv = models.BooleanField()
-    src = models.CharField(max_length=300)
+    src = models.FileField(max_length=300)
     likes = models.IntegerField()
     description = models.CharField(max_length=300)
 
