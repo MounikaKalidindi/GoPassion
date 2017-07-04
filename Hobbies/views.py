@@ -11,7 +11,7 @@ def index(request) :
 	#return HttpResponse(templates.render())
 	return HttpResponse( "Mouniii")
 
-
+"""
 def categories_list(request):	
 	#cat = Categories.objects.all().order_by('id')[:3]
 	category_obj = get_list_or_404(Categories)
@@ -25,11 +25,7 @@ def categories_list(request):
 		'Hobbies/category_list.html',
 		context = {'categories':category_obj, 'categories_map':category_map_obj, 'sub_categories':sub_category_obj, 'sub_categories_map':sub_category_map_obj}
 	)
-
-def getCategoryId(cat_name):
-	#c_obj = get_list_or_404(Categories)
-	c_id = get_object_or_404 (Categories, category = cat_name)
-	return (c_id.id)
+"""
 
 def nav_cat_list(request):
 	category_obj = get_list_or_404(Categories)
@@ -41,22 +37,13 @@ def nav_cat_list(request):
 		context = {'categories': category_obj, 'categories_map': category_map_obj, 'sub_categories':sub_category_obj}
 		)	
 def getDifferentOptions(request, category_name, sub_category_name):
-	return render(
-		request,
-		'Hobbies/options.html',
-		context = {'category_name': category_name, 'sub_category_name' : sub_category_name}
-		)
-
-def getDifferentOptions1(request):
-	category_obj = get_list_or_404(Categories)
-	category_map_obj = get_list_or_404(Categories_Sub_Categories_Mapping)
-#	sub_category_obj = get_list_or_404(Sub_Categories)
 	posts_obj = get_list_or_404(Posts)
 	return render(
 		request,
 		'Hobbies/options.html',
-		context = {'categories': category_obj, 'categories_map': category_map_obj, 'posts':posts_obj}
+		context = {'category_name': int(category_name), 'sub_category_name' : sub_category_name, 'posts':posts_obj}
 		)
+
 """
 class CategoriesListView(generic.ListView):
 	model = Categories
