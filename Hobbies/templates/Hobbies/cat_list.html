@@ -2,7 +2,7 @@
 {% block content %}
     <h1> Categories List<h1>
     {% if categories %}
-        <div id="horizontalmenu" float = "right">
+        <div id="horizontal menu" float = "right">
             <ul class="menu">
             {% for cat in categories %}
                 <li> {{cat.category_name}}  </li>            
@@ -11,9 +11,13 @@
                         {% if cat.id == cat_map.category_id.id %}
                             {% for sub_cat in sub_categories %} 
 			        {% if cat_map.sub_category_id.id == sub_cat.id %}	
-                                <div id="horizontalmenu" float = "right">
+                                <div id="horizontal menu" float = "right">
                                 <ul class="menu">
+<<<<<<< HEAD
 					<li> <a href = {% url 'user_options' cat.id sub_cat.id %}> {{cat_map.sub_category_id}} </a> </li>
+=======
+					<li> <a href = "{% url 'user_options' cat.id sub_cat.id %}"> {{cat_map.sub_category_id}} </a> </li>
+>>>>>>> 346e5c9ee0a0e02544daa693bcf9c0fb109fee25
                                  </ul>
                                  </div> 
 				{% endif %}
