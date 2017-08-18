@@ -15,22 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-<<<<<<< HEAD
 from Hobbies import views
 from GoPassion import settings
 from django.conf.urls.static import static
-=======
 
->>>>>>> 346e5c9ee0a0e02544daa693bcf9c0fb109fee25
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^Hobbies/', include('Hobbies.urls')),
 ]
 
-<<<<<<< HEAD
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-
-
-=======
->>>>>>> 346e5c9ee0a0e02544daa693bcf9c0fb109fee25
