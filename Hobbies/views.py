@@ -111,3 +111,5 @@ def addpost(request, cat_id, sub_cat_id):
     else:
         form = PostForm()
     return render(request, 'Hobbies/form.html', {'form': form, 'form_name': name})
+    
+   """
