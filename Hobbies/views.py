@@ -14,8 +14,6 @@ def index(request):
     # return HttpResponse(templates.render())
     return HttpResponse("Mouniii")
 
-
-<<<<<<< HEAD
 """
 def categories_list(request):	
 	#cat = Categories.objects.all().order_by('id')[:3]
@@ -31,7 +29,7 @@ def categories_list(request):
 		context = {'categories':category_obj, 'categories_map':category_map_obj, 'sub_categories':sub_category_obj, 'sub_categories_map':sub_category_map_obj}
 	)
 """
-=======
+
 def categories_list(request):
     # cat = Categories.objects.all().order_by('id')[:3]
     category_obj = get_list_or_404(Categories)
@@ -53,8 +51,6 @@ def getCategoryId(cat_name):
     c_id = get_object_or_404(Categories, category=cat_name)
     return (c_id.id)
 
->>>>>>> 346e5c9ee0a0e02544daa693bcf9c0fb109fee25
-
 def nav_cat_list(request):
     category_obj = get_list_or_404(Categories)
     category_map_obj = get_list_or_404(Categories_Sub_Categories_Mapping)
@@ -67,7 +63,6 @@ def nav_cat_list(request):
 
 
 def getDifferentOptions(request, category_name, sub_category_name):
-<<<<<<< HEAD
 	posts_obj = get_list_or_404(Posts)
 	return render(
 		request,
@@ -78,14 +73,11 @@ def getDifferentOptions(request, category_name, sub_category_name):
 """
 class CategoriesListView(generic.ListView):
 	model = Categories
-=======
     return render(
         request,
         'Hobbies/options.html',
         context={'category_name': category_name, 'sub_category_name': sub_category_name}
     )
-
->>>>>>> 346e5c9ee0a0e02544daa693bcf9c0fb109fee25
 
 def getDifferentOptions1(request):
     category_obj = get_list_or_404(Categories)
